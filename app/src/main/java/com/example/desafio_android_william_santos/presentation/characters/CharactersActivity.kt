@@ -1,4 +1,4 @@
-package com.example.desafio_android_william_santos.presentation.heros
+package com.example.desafio_android_william_santos.presentation.characters
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio_android_william_santos.R
 import kotlinx.android.synthetic.main.activity_heros.*
 
-class HerosActivity : AppCompatActivity() {
+class CharactersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,14 +18,14 @@ class HerosActivity : AppCompatActivity() {
         toolbarMain.title = getString(R.string.heros_title)
         setSupportActionBar(toolbarMain)
 
-        val viewModel:HerosViewModel = ViewModelProviders.of(this).get(HerosViewModel::class.java)
+        val viewModel:CharactersViewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
 
         viewModel.herosLiveData.observe(this, Observer {
             it?.let {heros ->
                 with(recyclerHeros){
-                    layoutManager = LinearLayoutManager(this@HerosActivity,RecyclerView.VERTICAL,false);
+                    layoutManager = LinearLayoutManager(this@CharactersActivity,RecyclerView.VERTICAL,false);
                     setHasFixedSize(true)
-                    adapter = HerosAdapter(heros)
+                    adapter = CharactersAdapter(heros)
                 }
             }
         })
