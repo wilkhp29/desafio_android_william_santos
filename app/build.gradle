@@ -21,7 +21,7 @@ android {
         debug {
             buildConfigField("String", "keyPublic", PUBLIC_KEY)
             buildConfigField("String", "keyPrivate", PRIVATE_KEY)
-            buildConfigField("String","timestamp",'"735935580"')
+            buildConfigField("String", "timestamp", '"735935580"')
             buildConfigField("String", "Api", '"https://gateway.marvel.com:443/v1/public/"')
         }
         release {
@@ -32,19 +32,20 @@ android {
 
 }
 
-ext{
-    suporteVersion="29.0.3"
-    retrofitVersion="2.6.0"
-    espressoVersion="3.2.0"
+ext {
+    suporteVersion = "29.0.3"
+    retrofitVersion = "2.6.0"
+    espressoVersion = "3.2.0"
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.android.support:recyclerview-v7:$suporteVersion"
-    implementation "com.android.support:appcompat-v7:$suporteVersion"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"

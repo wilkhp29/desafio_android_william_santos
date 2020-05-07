@@ -14,8 +14,8 @@ import retrofit2.http.Query
 interface MarvelServices {
     @GET("characters")
    fun getCharacters(
-        @Query("offset")offset:Int =0,
-        @Query("limit")limit:Int = 20,
+        @Query("offset")offset:Int,
+        @Query("limit")limit:Int,
         @Query("apikey")apikey: String = keyPublic,
         @Query("ts")ts: String = timestamp,
         @Query("hash")hash: String = HashGenerate.getHash()

@@ -1,53 +1,55 @@
 package com.example.desafio_android_william_santos.presentation.characters
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.dasafio_android_william_santos.data.model.Character
-import com.example.desafio_android_william_santos.data.ApiServices
-import com.example.desafio_android_william_santos.data.response.characters.CharactersBodyResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.desafio_android_william_santos.R
+import com.example.desafio_android_william_santos.data.CharacterResult
+import com.example.desafio_android_william_santos.repository.CharactersReposiroty
+import java.lang.IllegalArgumentException
 
-class CharactersViewModel : ViewModel(){
+class CharactersViewModel(val dataSource: CharactersReposiroty) : ViewModel(){
 
     val characersLiveData:MutableLiveData<List<Character>> = MutableLiveData();
+    val viewFlipperLiveData:MutableLiveData<Pair<Int,Int?>> = MutableLiveData();
 
-    fun getCharacter(){
-        ApiServices.service.getCharacters().enqueue(object:Callback<CharactersBodyResponse>{
+    fun getCharacter(offset:Int = 0,limit:Int=20){
 
-            override fun onResponse(call: Call<CharactersBodyResponse>, response: Response<CharactersBodyResponse>) {
-                if(response.isSuccessful){
-                    val characters:MutableList<Character> = mutableListOf()
-
-                    response.body()?.let {charactersBodyResponse ->
-                        for(result in charactersBodyResponse.data.characterList){
-                            val character = Character(
-                                result.id,
-                                result.name,
-                                result.description,
-                                "${result.thumbnail.path}.${result.thumbnail.extension}"
-                            )
-
-                            characters.add(character)
-                        }
-
-
+        dataSource.getCharacters(offset,limit){result:CharacterResult ->
+            when(result){
+                is CharacterResult.Sucess -> {
+                    characersLiveData.value = result.characters
+                    viewFlipperLiveData.value = Pair(VIEW_FLIPPER_CHARACTER,null)
+                }
+                is CharacterResult.ApiError -> {
+                    if (result.code == 401){
+                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.charaters_error_401)
+                    }else{
+                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.charaters_error_400_generic)
                     }
 
-                    characersLiveData.value = characters
+                }
+                is CharacterResult.ServerError -> {
+                    viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO,R.string.charaters_error_generic)
                 }
             }
-
-
-            override fun onFailure(call: Call<CharactersBodyResponse>, t: Throwable) {
-                Log.d("erro",t.message)
-            }
-
-
-
-        })
+        }
     }
 
+
+    companion object{
+        private const val VIEW_FLIPPER_CHARACTER = 1
+        private const val VIEW_FLIPPER_ERRO = 2
+    }
+
+    class ViewModelFactory(val dataSource: CharactersReposiroty) : ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+           if(modelClass.isAssignableFrom(CharactersViewModel::class.java)){
+               return  CharactersViewModel(dataSource) as T
+           }
+            throw  IllegalArgumentException("Unknown ViewmModel class")
+        }
+
+    }
 }

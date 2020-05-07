@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">desafio-android-william-santos</string>
 
-    <!-- Heros Activity -->
-    <string name="heros_title">Lista de Characters</string>
+    <!-- Characters Activity -->
+    <string name="charaters_title">Lista de personagens</string>
+    <string name="charaters_error_401">Não autorizado</string>
+    <string name="charaters_error_400_generic">Alguma coisa deu errado</string>
+    <string name="charaters_error_generic">erro no servidor</string>
+
+    <!-- Details Characters Activity -->
+    <string name="btn_hq">HQ mais Caro do personagem</string>
+    <string name="charaters_details_title">Detalhes do personagem</string>
+
+    <!-- HQ Details Activity -->
+    <string name="hq_details_title">HQ</string>
 </resources>

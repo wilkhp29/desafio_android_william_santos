@@ -1,5 +1,6 @@
 package com.example.desafio_android_william_santos.data.response.characters
 
+import com.example.dasafio_android_william_santos.data.model.Character
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -13,4 +14,11 @@ data class CharacterResultResponse(
     val description:String,
     @Json(name = "thumbnail")
     val thumbnail:ThumbnailResponse
-)
+){
+    fun getCharacterModel() = Character(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        img = "${this.thumbnail.path}.${this.thumbnail.extension}"
+    )
+}
