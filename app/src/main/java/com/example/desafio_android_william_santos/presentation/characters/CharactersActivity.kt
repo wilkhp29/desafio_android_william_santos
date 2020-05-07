@@ -1,6 +1,7 @@
 package com.example.desafio_android_william_santos.presentation.characters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -18,6 +19,10 @@ import kotlinx.android.synthetic.main.activity_characters.*
 
 class CharactersActivity : BaseActivity() {
 
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private var page = 1;
+    private val limit = 20;
+    private var lastPos = 0;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characters)
@@ -62,18 +67,43 @@ class CharactersActivity : BaseActivity() {
             }
         })
 
-
         viewModel.viewFlipperLiveData.observe(this, Observer {
             it?.let { viewFlipper ->
                 viewFlipperCharacter.displayedChild = viewFlipper.first
                 viewFlipper.second?.let {errorMenssageId ->
                     characterTextViewError.text = getString(errorMenssageId)
                 }
+                if(viewFlipper.second == null){
+                    if(lastPos !== 0) {
+                        recyclerCharacters.layoutManager?.scrollToPosition(lastPos - 4)
+                        ItemsLoading.visibility = View.GONE
+                    }
+                }
             }
         })
 
         viewModel.getCharacter();
 
+
+        setRecyclerViewScrollListener(viewModel)
+    }
+
+
+    private fun setRecyclerViewScrollListener(viewModel: CharactersViewModel) {
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val lm = recyclerView.layoutManager as LinearLayoutManager
+                lastPos = lm.findLastVisibleItemPosition()
+                val totalItemCount = recyclerView!!.layoutManager!!.itemCount
+                if (totalItemCount <= lastPos+3) {
+                   viewModel.getCharacter(limit*page,limit)
+                    ItemsLoading.visibility = View.VISIBLE
+                    page += 1
+                }
+            }
+        }
+        recyclerCharacters.addOnScrollListener(scrollListener)
     }
 
 }

@@ -56,4 +56,22 @@ class HqResultResponseTest {
 
         assertEquals(modelHq.price,10.1)
     }
+
+    @Test
+    fun testDescriptionNull(){
+        val price = PriceResponse("valor1", 0)
+        val price2 = PriceResponse("valor2",01.1)
+        val price3 = PriceResponse("valor3",10.1)
+
+
+        val hqResultHesponse = HqResultResponse("test",null,
+            ThumbnailResponse("oi",".jpg"),
+            arrayListOf
+                (price,price2,price3))
+
+        val modelHq = hqResultHesponse.getHqModel();
+
+        assertEquals(modelHq.price,10.1)
+    }
+
 }

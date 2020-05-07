@@ -27,6 +27,7 @@ class CharactersAdapter(
         holder.bindView(characters[position])
     }
 
+
     class HerosViwHolder(view: View,private val onItemClickListener: ((character:Character) -> Unit)) : RecyclerView.ViewHolder(view){
         val img = view.heroImg;
         val name = view.heroName;

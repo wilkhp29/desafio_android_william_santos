@@ -8,18 +8,20 @@ import com.example.desafio_android_william_santos.R
 import com.example.desafio_android_william_santos.data.results.CharacterResult
 import com.example.desafio_android_william_santos.repository.characters.CharactersReposiroty
 import java.lang.IllegalArgumentException
+import java.util.*
 
 class CharactersViewModel(val dataSource: CharactersReposiroty) : ViewModel(){
 
     val characersLiveData:MutableLiveData<List<Character>> = MutableLiveData();
     val viewFlipperLiveData:MutableLiveData<Pair<Int,Int?>> = MutableLiveData();
-
+    private val characters:MutableList<Character> = ArrayList()
     fun getCharacter(offset:Int = 0,limit:Int=20){
 
         dataSource.getCharacters(offset,limit){result: CharacterResult ->
             when(result){
                 is CharacterResult.Sucess -> {
-                    characersLiveData.value = result.characters
+                    characters.addAll(result.characters)
+                    characersLiveData.value =  characters
                     viewFlipperLiveData.value = Pair(VIEW_FLIPPER_CHARACTER,null)
                 }
                 is CharacterResult.ApiError -> {
