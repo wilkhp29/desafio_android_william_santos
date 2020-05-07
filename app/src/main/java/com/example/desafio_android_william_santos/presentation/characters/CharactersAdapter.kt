@@ -1,19 +1,21 @@
 package com.example.desafio_android_william_santos.presentation.characters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio_android_william_santos.R
 import com.example.dasafio_android_william_santos.data.model.Character
-import kotlinx.android.synthetic.main.item_heros.view.*
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_characters.view.*
 
 class CharactersAdapter(
     val characters:List<Character>
 ) : RecyclerView.Adapter<CharactersAdapter.HerosViwHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersAdapter.HerosViwHolder {
-        val viewType = LayoutInflater.from(parent.context).inflate(R.layout.item_heros,parent,false);
+        val viewType = LayoutInflater.from(parent.context).inflate(R.layout.item_characters,parent,false);
         return HerosViwHolder(viewType);
     }
 
@@ -26,10 +28,10 @@ class CharactersAdapter(
     class HerosViwHolder(view: View) : RecyclerView.ViewHolder(view){
         val img = view.heroImg;
         val name = view.heroName;
-        val description = view.heroDescription;
+
         fun bindView(character: Character){
             name.text = character.name
-            description.text = character.description
+            Picasso.get().load(Uri.parse(character.img)).into(img)
         }
     }
 }
