@@ -35,7 +35,7 @@ class CharacterDetailsActivity : BaseActivity() {
         ViewCompat.setTransitionName(detailsImg, VIEW_NAME_HEADER_IMAGE);
         ViewCompat.setTransitionName(detailsName, VIEW_NAME_HEADER_TITLE);
         btnHq.setOnClickListener {
-            val intent = HqDetailsActivity.getStartIntent(this@CharacterDetailsActivity,character?.id)
+            val intent = HqDetailsActivity.getStartIntent(this@CharacterDetailsActivity,character.id)
             startActivity(intent)
         }
     }

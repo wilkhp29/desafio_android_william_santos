@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.dasafio_android_william_santos.data.model.Character
 import com.example.desafio_android_william_santos.R
-import com.example.desafio_android_william_santos.data.CharacterResult
-import com.example.desafio_android_william_santos.repository.CharactersReposiroty
+import com.example.desafio_android_william_santos.data.results.CharacterResult
+import com.example.desafio_android_william_santos.repository.characters.CharactersReposiroty
 import java.lang.IllegalArgumentException
 
 class CharactersViewModel(val dataSource: CharactersReposiroty) : ViewModel(){
@@ -16,7 +16,7 @@ class CharactersViewModel(val dataSource: CharactersReposiroty) : ViewModel(){
 
     fun getCharacter(offset:Int = 0,limit:Int=20){
 
-        dataSource.getCharacters(offset,limit){result:CharacterResult ->
+        dataSource.getCharacters(offset,limit){result: CharacterResult ->
             when(result){
                 is CharacterResult.Sucess -> {
                     characersLiveData.value = result.characters
@@ -24,14 +24,14 @@ class CharactersViewModel(val dataSource: CharactersReposiroty) : ViewModel(){
                 }
                 is CharacterResult.ApiError -> {
                     if (result.code == 401){
-                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.charaters_error_401)
+                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.error_401)
                     }else{
-                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.charaters_error_400_generic)
+                        viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO, R.string.error_400)
                     }
 
                 }
                 is CharacterResult.ServerError -> {
-                    viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO,R.string.charaters_error_generic)
+                    viewFlipperLiveData.value = Pair(VIEW_FLIPPER_ERRO,R.string.error_servidor)
                 }
             }
         }

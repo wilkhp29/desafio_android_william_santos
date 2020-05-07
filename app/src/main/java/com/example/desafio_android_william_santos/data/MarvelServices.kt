@@ -4,9 +4,11 @@ import com.example.desafio_android_william_santos.BuildConfig.keyPublic
 import com.example.desafio_android_william_santos.BuildConfig.timestamp
 import com.example.desafio_android_william_santos.data.Utils.HashGenerate
 import com.example.desafio_android_william_santos.data.response.characters.CharactersBodyResponse
+import com.example.desafio_android_william_santos.data.response.hq.HqBodyResponse
 import retrofit2.Call
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 import retrofit2.http.Query
 
@@ -20,4 +22,13 @@ interface MarvelServices {
         @Query("ts")ts: String = timestamp,
         @Query("hash")hash: String = HashGenerate.getHash()
     ): Call<CharactersBodyResponse>
+
+
+    @GET("characters/{characterId}/comics")
+    fun getComics(
+        @Path("characterId")characterId:Int,
+        @Query("apikey")apikey: String = keyPublic,
+        @Query("ts")ts: String = timestamp,
+        @Query("hash")hash: String = HashGenerate.getHash()
+    ): Call<HqBodyResponse>
 }

@@ -3,9 +3,12 @@
 
     <!-- Characters Activity -->
     <string name="charaters_title">Lista de personagens</string>
-    <string name="charaters_error_401">Não autorizado</string>
-    <string name="charaters_error_400_generic">Alguma coisa deu errado</string>
-    <string name="charaters_error_generic">erro no servidor</string>
+
+
+    <string name="error_401">Não autorizado</string>
+    <string name="error_400">Alguma coisa deu errado</string>
+    <string name="error_servidor">erro no servidor</string>
+    <string name="result_empty">Personagem não tem hq disponivel</string>
 
     <!-- Details Characters Activity -->
     <string name="btn_hq">HQ mais Caro do personagem</string>

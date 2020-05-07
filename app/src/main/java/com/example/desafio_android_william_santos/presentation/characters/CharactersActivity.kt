@@ -6,14 +6,13 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio_android_william_santos.R
 import com.example.desafio_android_william_santos.presentation.base.BaseActivity
 import com.example.desafio_android_william_santos.presentation.details.CharacterDetailsActivity
-import com.example.desafio_android_william_santos.repository.CharactersApiDataSource
+import com.example.desafio_android_william_santos.repository.characters.CharactersApiDataSource
 import kotlinx.android.synthetic.main.activity_characters.*
 
 
@@ -26,7 +25,9 @@ class CharactersActivity : BaseActivity() {
         var toolbar: Toolbar = findViewById(R.id.include)
         setupToolbar(toolbar , R.string.charaters_title)
 
-        val viewModel:CharactersViewModel = CharactersViewModel.ViewModelFactory(CharactersApiDataSource())
+        val viewModel:CharactersViewModel = CharactersViewModel.ViewModelFactory(
+            CharactersApiDataSource()
+        )
             .create(CharactersViewModel::class.java)
 
         viewModel.characersLiveData.observe(this, Observer {
