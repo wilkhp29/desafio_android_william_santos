@@ -16,8 +16,8 @@ class HqApiDataSource(val services: MarvelServices =  ApiServices.service): HqRe
             override fun onResponse(call: Call<HqBodyResponse>, response: Response<HqBodyResponse>) {
                 if(response.isSuccessful){
                     response.body()?.let {HqBodyResponse ->
-                        if(HqBodyResponse.data.hqList.count() > 0){
-                             val hq = HqBodyResponse.data.getHqResultHighestValue().getHqModel()
+                        if(HqBodyResponse.data!!.hqList.count() > 0){
+                             val hq = HqBodyResponse.data!!.getHqResultHighestValue().getHqModel()
                             HqResultCallback(HqResult.Sucess(hq))
                         }else{
                             HqResultCallback(HqResult.ApiError(response.code()))

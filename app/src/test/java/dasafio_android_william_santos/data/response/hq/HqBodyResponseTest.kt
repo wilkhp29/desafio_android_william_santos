@@ -134,12 +134,9 @@ class HqBodyResponseTest {
 
         val hqdata =   HqDataResponse(hqResultResponse)
 
-        val hqBodyResponse = HqBodyResponse(
-            hqdata,
-            200
-        )
+        val hqBodyResponse = HqBodyResponse(hqdata,1,null)
 
         Assert.assertEquals(hqBodyResponse.data,hqdata)
-        Assert.assertEquals(hqBodyResponse.code,200)
+        Assert.assertEquals(hqBodyResponse.code,1)
     }
 }

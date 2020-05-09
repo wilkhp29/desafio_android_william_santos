@@ -19,7 +19,7 @@ class CharactersApiDataSource(val service:MarvelServices = ApiServices.service):
                     val characters:MutableList<Character> = mutableListOf()
 
                     response.body()?.let {charactersBodyResponse ->
-                        for(result in charactersBodyResponse.data.characterList){
+                        for(result in charactersBodyResponse.data?.characterList!!){
                             val character = result.getCharacterModel()
                             characters.add(character)
                         }

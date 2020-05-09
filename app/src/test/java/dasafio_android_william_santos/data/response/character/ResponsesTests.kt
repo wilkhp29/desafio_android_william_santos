@@ -126,7 +126,7 @@ class ResponsesTests {
         val result = CharacterResultResponse(1,"william","coverage",thumbnail)
         val list = listOf(result)
         val data = CharacterDataResponse(list)
-        val body = CharactersBodyResponse(data,200)
+        val body = CharactersBodyResponse(data,200,null)
 
         assertEquals(body.code,200)
         assertEquals(body.data,data)

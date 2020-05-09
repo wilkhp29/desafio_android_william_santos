@@ -93,7 +93,7 @@ class HqApiServiceTest {
         server.enqueue(
             MockResponse()
                 .setResponseCode(401)
-                .setBody("{data:{results:[]},code:200}"))
+              )
 
         viewModal.viewFlipperLiveData.observeForever(viewFlipperLiveDataObserver)
 
@@ -109,7 +109,7 @@ class HqApiServiceTest {
         server.enqueue(
             MockResponse()
                 .setResponseCode(400)
-                .setBody("{data:{results:[]},code:200}"))
+              )
         viewModal.viewFlipperLiveData.observeForever(viewFlipperLiveDataObserver)
 
         viewModal.getHqHighestValue(1)
@@ -123,12 +123,12 @@ class HqApiServiceTest {
         server.enqueue(
             MockResponse()
                 .setResponseCode(500)
-                .setBody("{data:{results:[],code:200}"))
+              )
         viewModal.viewFlipperLiveData.observeForever(viewFlipperLiveDataObserver)
 
         viewModal.getHqHighestValue(1)
         TimeUnit.MILLISECONDS.sleep(100);
-        verify(viewFlipperLiveDataObserver).onChanged(Pair(2, R.string.error_servidor))
+        verify(viewFlipperLiveDataObserver).onChanged(Pair(2, R.string.error_400))
 
     }
 

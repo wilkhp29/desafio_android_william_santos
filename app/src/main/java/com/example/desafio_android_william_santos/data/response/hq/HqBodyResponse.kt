@@ -6,7 +6,9 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class HqBodyResponse (
     @Json(name = "data")
-    val data:HqDataResponse,
+    val data:HqDataResponse? = null,
     @Json(name = "code")
-    val code:Int
+    val code:Int?= null,
+    @Json(name="message")
+    val message:String? = null
 )
