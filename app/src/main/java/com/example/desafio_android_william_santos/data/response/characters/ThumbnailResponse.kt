@@ -9,4 +9,6 @@ data class ThumbnailResponse (
     val path:String,
     @Json(name = "extension")
     val extension:String
-)
+){
+    fun getPhoto() = this.path+"."+this.extension
+}

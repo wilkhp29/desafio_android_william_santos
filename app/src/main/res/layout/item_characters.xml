@@ -23,10 +23,10 @@
         <TextView
             android:id="@+id/heroName"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="18dp"
+            android:maxLines="3"
+            android:textStyle="bold"
            />
     </LinearLayout>
 

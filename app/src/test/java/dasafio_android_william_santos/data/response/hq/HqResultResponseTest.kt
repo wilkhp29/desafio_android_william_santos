@@ -1,17 +1,15 @@
 package com.example.desafio_android_william_santos.data.response.hq
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+
 class HqResultResponseTest {
     @Test
     fun testHighestValue(){
-        val price = PriceResponse("valor1",00.1)
-        val price2 = PriceResponse("valor2",01.1)
-        val price3 = PriceResponse("valor3",10.1)
+        val price = PriceResponse(00.1)
+        val price2 = PriceResponse(01.1)
+        val price3 = PriceResponse(10.1)
 
 
         val hqResultHesponse = HqResultResponse("test","description",
@@ -26,7 +24,7 @@ class HqResultResponseTest {
 
     @Test
     fun testHighestValueOneInList(){
-        val price = PriceResponse("valor1",00.1)
+        val price = PriceResponse(00.1)
 
 
         val hqResultHesponse = HqResultResponse("test","description",
@@ -42,36 +40,52 @@ class HqResultResponseTest {
 
     @Test
     fun testHighestValueZeroInList(){
-        val price = PriceResponse("valor1", 0)
-        val price2 = PriceResponse("valor2",01.1)
-        val price3 = PriceResponse("valor3",10.1)
+        val price = PriceResponse( 0)
+        val price2 = PriceResponse(01.1)
+        val price3 = PriceResponse(10.1)
 
 
         val hqResultHesponse = HqResultResponse("test","description",
-            ThumbnailResponse("oi",".jpg"),
+            ThumbnailResponse("oi","jpg"),
             arrayListOf
                 (price,price2,price3))
 
         val modelHq = hqResultHesponse.getHqModel();
 
+        assertEquals(modelHq.title,"test")
+        assertEquals(modelHq.description,"description")
         assertEquals(modelHq.price,10.1)
+        assertEquals(modelHq.img,"oi.jpg")
     }
 
     @Test
     fun testDescriptionNull(){
-        val price = PriceResponse("valor1", 0)
-        val price2 = PriceResponse("valor2",01.1)
-        val price3 = PriceResponse("valor3",10.1)
+        val price = PriceResponse( 0)
+        val price2 = PriceResponse(01.1)
+        val price3 = PriceResponse(10.1)
 
 
         val hqResultHesponse = HqResultResponse("test",null,
-            ThumbnailResponse("oi",".jpg"),
+            ThumbnailResponse("oi","jpg"),
             arrayListOf
                 (price,price2,price3))
 
         val modelHq = hqResultHesponse.getHqModel();
 
+        assertEquals(modelHq.title,"test")
+        assertEquals(modelHq.description," ")
         assertEquals(modelHq.price,10.1)
+        assertEquals(modelHq.img,"oi.jpg")
+    }
+
+
+    @Test
+    fun testThumbnail(){
+        val thumb =  ThumbnailResponse("oi","jpg")
+
+        assertEquals(thumb.extension,"jpg")
+        assertEquals(thumb.path,"oi")
+        assertEquals(thumb.getPhoto(),"oi.jpg")
     }
 
 }

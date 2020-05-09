@@ -19,6 +19,6 @@ data class CharacterResultResponse(
         id = this.id,
         name = this.name,
         description = this.description,
-        img = "${this.thumbnail.path}.${this.thumbnail.extension}"
+        img = this.thumbnail.getPhoto()
     )
 }

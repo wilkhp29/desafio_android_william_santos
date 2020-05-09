@@ -55,9 +55,9 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
+                android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hqImg" />
@@ -72,6 +72,7 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16dp"
+                android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hqTitle" />
@@ -84,7 +85,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hqDescription" />
@@ -96,7 +97,6 @@
             android:id="@+id/characterTextViewError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
             android:layout_gravity="center"
             />
 

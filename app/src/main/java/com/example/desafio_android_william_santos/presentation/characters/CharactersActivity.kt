@@ -1,5 +1,6 @@
 package com.example.desafio_android_william_santos.presentation.characters
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View

@@ -30,4 +30,5 @@ object ApiServices {
     }
 
     val service = initRetrofit().create(MarvelServices::class.java)
+
 }

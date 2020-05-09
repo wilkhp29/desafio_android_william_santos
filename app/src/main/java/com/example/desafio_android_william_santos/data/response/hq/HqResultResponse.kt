@@ -9,7 +9,7 @@ data class HqResultResponse(
     @Json(name = "title")
     val title:String,
     @Json(name = "description")
-    var description:String? = "null",
+    var description:String? = " ",
    @Json(name = "thumbnail")
     val thumbnail:ThumbnailResponse,
     @Json(name = "prices")
@@ -17,8 +17,8 @@ data class HqResultResponse(
 ){
     fun getHqModel() = Hq(
         title = this.title,
-        img = "${this.thumbnail.path}.${this.thumbnail.extension}",
+        img = this.thumbnail.getPhoto(),
         price = this.price.sortedWith(compareBy({it.let { prices -> prices.price.toDouble()}})).asReversed().get(0).price,
-        description = this.description.toString()
+        description = this.description.toString().replace("null"," ")
     )
 }

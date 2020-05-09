@@ -2,16 +2,17 @@ package com.example.desafio_android_william_santos.repository.characters
 
 import com.example.dasafio_android_william_santos.data.model.Character
 import com.example.desafio_android_william_santos.data.ApiServices
+import com.example.desafio_android_william_santos.data.MarvelServices
 import com.example.desafio_android_william_santos.data.results.CharacterResult
 import com.example.desafio_android_william_santos.data.response.characters.CharactersBodyResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CharactersApiDataSource: CharactersReposiroty {
+class CharactersApiDataSource(val service:MarvelServices = ApiServices.service): CharactersReposiroty {
 
     override fun getCharacters(offset: Int, limit: Int,charactersResultCallback:(result: CharacterResult) -> Unit){
-        ApiServices.service.getCharacters(offset,limit).enqueue(object: Callback<CharactersBodyResponse> {
+        service.getCharacters(offset,limit).enqueue(object: Callback<CharactersBodyResponse> {
 
             override fun onResponse(call: Call<CharactersBodyResponse>, response: Response<CharactersBodyResponse>) {
                 if(response.isSuccessful){

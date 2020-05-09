@@ -26,12 +26,14 @@
         app:layout_constraintTop_toBottomOf="@+id/include"
         >
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/characterLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/iron_man" />
         
        <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="match_parent"
@@ -60,16 +62,11 @@
        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
         <TextView
             android:id="@+id/characterTextViewError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
     </ViewFlipper>
 
